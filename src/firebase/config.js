@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDBACRCk1NnxEByOkr33eJl8qF5sYeeLs4",
+  apiKey: "",
   authDomain: "meeting-scheduler-53198.firebaseapp.com",
   projectId: "meeting-scheduler-53198",
   storageBucket: "meeting-scheduler-53198.firebasestorage.app",
-  messagingSenderId: "419183092116",
-  appId: "1:419183092116:web:70778893aa77129a7b2f81",
-  measurementId: "G-ETHFJYX95Z"
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
 };
 
 const app = initializeApp(firebaseConfig);
