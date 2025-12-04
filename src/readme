@@ -1,0 +1,180 @@
+# Meeting Scheduler
+
+A modern, full-featured meeting scheduling application with Zoom integration, email invitations, and multi-timezone support.
+
+## Features
+
+- **Multiple Calendar Views** - Month, Week, Day, and Agenda views
+- **Platform Integration** - Zoom, Microsoft Teams, and Google Meet support
+- **Email Invitations** - Send calendar invites via Gmail API
+- **Timezone Support** - 600+ timezones with automatic detection
+- **Conflict Detection** - Automatic scheduling conflict warnings
+- **Google Authentication** - Secure Firebase authentication
+- **Real-time Search** - Instant meeting filtering and search
+- **Data Persistence** - LocalStorage for meeting retention
+- **CSV Export** - Download meeting schedules
+- **Responsive Design** - Optimized for mobile, tablet, and desktop
+
+## Tech Stack
+
+- React 18
+- Tailwind CSS
+- Firebase Authentication
+- Node.js/Express
+- Zoom OAuth API
+- Gmail API
+- React Router
+
+## Prerequisites
+
+- Node.js 14+ and npm
+- Google account (Firebase)
+- Zoom account (optional)
+
+## Installation
+```bash
+# Clone repository
+git clone https://github.com/yourusername/meeting-scheduler.git
+cd meeting-scheduler
+
+# Install dependencies
+npm install
+
+# Install backend dependencies
+npm install express cors axios
+
+# Install Tailwind
+npm install -D tailwindcss@3 postcss autoprefixer
+```
+
+## Configuration
+
+### 1. Environment Variables
+
+Create `.env` file:
+```
+REACT_APP_ZOOM_CLIENT_ID=your_zoom_client_id
+REACT_APP_ZOOM_CLIENT_SECRET=your_zoom_client_secret
+REACT_APP_ZOOM_REDIRECT_URI=http://localhost:3000/auth/zoom/callback
+```
+
+### 2. Firebase Setup
+
+1. Create Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+2. Enable Google authentication
+3. Register web app and copy config to `src/firebase/config.js`
+
+### 3. Zoom Setup
+
+1. Create OAuth app at [marketplace.zoom.us](https://marketplace.zoom.us)
+2. Add redirect URI: `http://localhost:3000/auth/zoom/callback`
+3. Enable scopes: `meeting:write:meeting`, `meeting:read:meeting`, `user:read:user`
+
+### 4. Gmail API
+
+1. Enable Gmail API in Google Cloud Console
+2. Configure OAuth consent screen
+3. Add scope: `https://www.googleapis.com/auth/gmail.send`
+
+## Running the Application
+```bash
+# Terminal 1: Start backend
+node server.js
+
+# Terminal 2: Start frontend
+npm start
+```
+
+Application runs at `http://localhost:3000`
+
+## Usage
+
+1. Sign in with Google
+2. Connect Zoom account (optional)
+3. Create meetings with platform selection
+4. Add participants and check "Send email invites"
+5. View meetings in different calendar layouts
+6. Join meetings with one click
+
+## Project Structure
+```
+meeting-scheduler/
+├── src/
+│   ├── components/
+│   │   └── ZoomCallback.js
+│   ├── firebase/
+│   │   └── config.js
+│   ├── services/
+│   │   ├── zoomService.js
+│   │   └── emailService.js
+│   ├── App.js
+│   └── index.js
+├── server.js
+├── .env
+└── package.json
+```
+
+## API Integration
+
+### Zoom OAuth Flow
+
+1. User clicks "Connect Zoom"
+2. Redirects to Zoom authorization
+3. Callback exchanges code for access token
+4. Token stored in localStorage
+5. Real Zoom meetings created via API
+
+### Gmail Invitations
+
+1. User signs in with Google (Gmail scope)
+2. OAuth token obtained
+3. Calendar invites sent via Gmail API
+4. Participants receive email with .ics attachment
+
+## Security Notes
+
+- Client secrets handled on backend only
+- OAuth tokens stored in localStorage
+- Environment variables for sensitive data
+- Never commit `.env` to repository
+
+## Troubleshooting
+
+### "Invalid client_id"
+- Verify `.env` file exists in project root
+- Check variable names start with `REACT_APP_`
+- Restart both servers after changes
+
+### Zoom connection fails
+- Ensure redirect URI matches in Zoom app settings
+- Clear localStorage and reconnect
+- Verify scopes are added in Zoom app
+
+### Email invites not working
+- Confirm Gmail API is enabled
+- Check OAuth consent screen configuration
+- Verify user is added as test user
+
+## Future Enhancements
+
+- Firebase Firestore integration
+- Microsoft Teams API
+- Google Calendar sync
+- Meeting analytics
+- Recurring meeting automation
+- Meeting templates
+- RSVP tracking
+
+## License
+
+MIT
+
+## Author
+
+Ummara Ali
+
+## Acknowledgments
+
+- Zoom API Documentation
+- Firebase Documentation
+- Gmail API Documentation
